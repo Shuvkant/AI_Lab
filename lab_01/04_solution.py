@@ -6,7 +6,11 @@ final_range=int(input("Enter the final range "))
 def prime_checker(number):
     if(number<2):
         return False
-    for i in range(2, int(number**0.5)+1, 1):
+    if(number==int(2)):
+        return True
+    if(number%2==0):
+        return False
+    for i in range(3, int(number**0.5)+1,2 ):
         if(number%i==0):
             return False
     return True
