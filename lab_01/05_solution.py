@@ -3,7 +3,7 @@
 """
 marks=[]
 for i in range(1,11):
-    mark=float(input(f"Enter the makr of {i} student "))
+    mark=float(input(f"Enter the mark of {i} student "))
     marks.append(mark)
 
 print(marks)

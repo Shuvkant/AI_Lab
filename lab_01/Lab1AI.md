@@ -57,3 +57,8 @@ Python is a widely used high-level, general-purpose, interpreted, dynamic progra
 
 ![](Aspose.Words.d759f86b-f575-4b00-8487-3fb4df384df1.002.jpeg)
 **IOE**
+
+## Bonus question
+-Wap to create a module named "recursion" which has methods to compute the factorial of a number and nth fabonacci term using recursion
+
+- Create another python script called das.py and use the "recursion" module to computer the factorial and nth fabonacci term
