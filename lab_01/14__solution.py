@@ -3,19 +3,21 @@
 and perimeter.
 """
 import math
+
+
 class Circle:
     def __init__(self, radius):
-        self.radius=radius
+        self.radius = radius
 
     def area(self):
-        area= (math.pi)*(self.radius)**2
+        area = (math.pi)*pow(self.radius, 2)
         print(f"{area:.2f}")
 
     def perimeter(self):
-        perimeter= (math.pi)*2*(self.radius)
+        perimeter = (math.pi)*2*(self.radius)
         print(f"{perimeter:.2f}")
 
-p1=Circle(5)
+
+p1 = Circle(5)
 p1.area()
 p1.perimeter()
-
