@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio with Chatbot</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f4f4f4, #eaeaea);
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 20px;
+            background: #4CAF50;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        /* Chatbox Styles */
+        .chatbox {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            background: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 14px;
+        }
+
+        .chatbox-header {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .chatbox-body {
+            max-height: 250px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f9f9f9;
+            color: #444;
+        }
+
+        .chatbox-body div {
+            margin-bottom: 10px;
+        }
+
+        .chatbox-body strong {
+            display: block;
+            font-weight: 600;
+        }
+
+        .chatbox-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+
+        .chatbox-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .chatbox-input input::placeholder {
+            color: #aaa;
+        }
+
+        .chatbox-input button {
+            padding: 10px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .chatbox-input button:hover {
+            background: #45a049;
+        }
+
+        /* Scrollbar Customization */
+        .chatbox-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chatbox-body::-webkit-scrollbar-thumb {
+            background: #4CAF50;
+            border-radius: 4px;
+        }
+
+        .chatbox-body::-webkit-scrollbar-thumb:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Portfolio</h1>
+    </header>
+
+    <!-- Chatbot Widget -->
+    <div class="chatbox" id="chatbox">
+        <div class="chatbox-header">Chatbot</div>
+        <div class="chatbox-body" id="chatbox-body"></div>
+        <div class="chatbox-input">
+            <input type="text" id="userInput" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const userInput = document.getElementById('userInput').value;
+            if (!userInput.trim()) return;
+
+            const chatboxBody = document.getElementById('chatbox-body');
+
+            // Display user message
+            chatboxBody.innerHTML += `<div><strong>You:</strong> ${userInput}</div>`;
+
+            // Clear input
+            document.getElementById('userInput').value = '';
+
+            // Send to Flask server
+            const response = await fetch('http://127.0.0.1:5000/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: userInput })
+            });
+
+            const data = await response.json();
+
+            // Display bot response
+            chatboxBody.innerHTML += `<div><strong>Bot:</strong> ${data.response}</div>`;
+            chatboxBody.scrollTop = chatboxBody.scrollHeight;
+        }
+    </script>
+</body>
+</html>
