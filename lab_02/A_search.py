@@ -39,8 +39,9 @@ def astar(G, h, start, goal):
     prev[start] = " "
     while (not PQ.empty()):
         outStateFScore, (outState, outStateGScore) = PQ.get()
-        print(f"outState={outState}\n outStateGScore={
-            outStateGScore}\n outStateFScore={outStateFScore}")
+        print(f"outState={outState}")
+        print(f"outStateGScore={outStateGScore}")
+        print(f"outStateFScore={outStateFScore}")
 
         print(f"Size of elements in queue: {PQ.qsize()}")
         visited.add(outState)
